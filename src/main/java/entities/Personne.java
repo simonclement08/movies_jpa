@@ -4,6 +4,8 @@ import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 /**
@@ -12,6 +14,7 @@ import javax.persistence.Table;
  * Représente un réalisateur ou un acteur
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "PERSONNE")
 public abstract class Personne {
 
