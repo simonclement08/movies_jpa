@@ -37,10 +37,10 @@ public class RoleDao extends AbstractDao<Role> {
 	 */
 	public Role find(String characterName, Film film, Acteur acteur) {
 
-		TypedQuery<Role> query = em.createQuery("FROM " + classe.getSimpleName() 
-				+ "r JOIN r.film f "
-				+ "r JOIN r.acteur a " 
-				+ "WHERE characterName = :characterName AND f.id = :film AND a.id = :acteur", classe);
+		TypedQuery<Role> query = em.createQuery("SELECT r FROM " + classe.getSimpleName() + " r "
+				+ "JOIN r.film f "
+				+ "JOIN r.acteur a " 
+				+ "WHERE r.characterName = :characterName AND f.id = :film AND a.id = :acteur", classe);
 		query.setParameter("characterName", characterName);
 		query.setParameter("film", film.getId());
 		query.setParameter("acteur", acteur.getId());

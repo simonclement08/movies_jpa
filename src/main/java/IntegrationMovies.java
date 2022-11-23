@@ -44,10 +44,16 @@ public class IntegrationMovies {
 		}
 
 		FilmManager filmManager = new FilmManager();
+		int i = 0;
 		for (Film film : films) {
+			i++;
 			filmManager.traiteFilm(film);
-			System.out.println(film.getNom());
+			if (i % 100 == 0) {
+				System.out.println("Nombre de films traités : " + i);
+			}
 		}
+		System.out.println("Nombre de films traités : " + i);
+		filmManager.close();
 	}
 
 }

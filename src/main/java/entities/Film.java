@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "FILM")
+@Cacheable
 public class Film {
 
 	/** Id */
@@ -50,8 +52,10 @@ public class Film {
 	private Langue langue;
 
 	@ManyToMany
-	@JoinTable(name = "FILM_GENRE", uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID",
-			"GENRE_ID" }) }, joinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "GENRE_ID", referencedColumnName = "ID"))
+	@JoinTable(name = "FILM_GENRE", 
+		uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID", "GENRE_ID" }) },
+		joinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"),
+		inverseJoinColumns = @JoinColumn(name = "GENRE_ID", referencedColumnName = "ID"))
 	private List<Genre> genres = new ArrayList<Genre>();
 
 	/** Pays d'origine */
@@ -65,13 +69,17 @@ public class Film {
 	private Lieu lieuTournage;
 
 	@ManyToMany
-	@JoinTable(name = "REALISATEUR_FILM", uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID",
-			"REALISATEUR_ID" }) }, joinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "REALISATEUR_ID", referencedColumnName = "ID"))
+	@JoinTable(name = "REALISATEUR_FILM", 
+		uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID", "REALISATEUR_ID" }) },
+		joinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"),
+		inverseJoinColumns = @JoinColumn(name = "REALISATEUR_ID", referencedColumnName = "ID"))
 	private List<Realisateur> realisateurs = new ArrayList<Realisateur>();
 
 	@ManyToMany
-	@JoinTable(name = "MAIN_ACTEUR", uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID",
-			"ACTEUR_ID" }) }, joinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ACTEUR_ID", referencedColumnName = "ID"))
+	@JoinTable(name = "MAIN_ACTEUR",
+		uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID", "ACTEUR_ID" }) }, 
+		joinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"), 
+		inverseJoinColumns = @JoinColumn(name = "ACTEUR_ID", referencedColumnName = "ID"))
 	private List<Acteur> castingPrincipal = new ArrayList<Acteur>();
 
 	/** Liste des rôles dans le film */

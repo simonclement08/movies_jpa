@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,6 +21,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "ACTEUR")
+@Cacheable
 public class Acteur extends Personne {
 
 	/** Taille */

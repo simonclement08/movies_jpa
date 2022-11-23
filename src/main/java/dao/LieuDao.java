@@ -35,9 +35,12 @@ public class LieuDao extends AbstractDao<Lieu> {
 	 * @return Lieu
 	 */
 	public Lieu find(String ville, String etatDpt, Pays pays) {
-
-		TypedQuery<Lieu> query = em.createQuery("FROM " + classe.getSimpleName() + "l JOIN l.pays p "
-				+ "WHERE ville=:ville AND etat=:etat AND p.id=:pays", classe);
+		TypedQuery<Lieu> query = 
+				em.createQuery("SELECT l FROM " + classe.getSimpleName() + " l "
+				+ "JOIN l.pays p "
+				+ "WHERE l.ville = :ville "
+				+ "AND l.etatDept = :etat "
+				+ "AND p.id = :pays", classe);
 		query.setParameter("ville", ville);
 		query.setParameter("etat", etatDpt);
 		query.setParameter("pays", pays.getId());

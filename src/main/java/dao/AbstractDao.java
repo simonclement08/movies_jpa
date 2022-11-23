@@ -48,7 +48,7 @@ public abstract class AbstractDao<T> {
 	 */
 	public T find(String nom) {
 
-		TypedQuery<T> query = em.createQuery("FROM " + classe.getSimpleName() + " WHERE nom=:nom", classe);
+		TypedQuery<T> query = em.createQuery("FROM " + classe.getSimpleName() + " WHERE nom = :nom", classe);
 		query.setParameter("nom", nom);
 
 		List<T> results = query.getResultList();
