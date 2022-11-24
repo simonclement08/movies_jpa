@@ -40,6 +40,12 @@ public class ActeurDao extends AbstractDao<Acteur> {
 		return results.get(0);
 	}
 	
+	/**
+	 * Retourne tous les acteurs d'un film
+	 * 
+	 * @param film
+	 * @return List<Acteur>
+	 */
 	public List<Acteur> findByFilm(Film film){
 		TypedQuery<Acteur> query = em.createQuery("SELECT DISTINCT a "
 				+ "FROM " + classe.getSimpleName() + " a "
