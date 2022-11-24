@@ -30,4 +30,9 @@ public class Realisateur extends Personne {
 		super(id, identite, url);
 	}
 
+	@Override
+	public String toString() {
+		return "Realisateur [getId()=" + getId() + ", getIdentite()=" + getIdentite() + ", getUrl()=" + getUrl() + "]";
+	}
+
 }

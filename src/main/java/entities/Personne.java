@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -48,6 +50,24 @@ public abstract class Personne {
 		this.id = id;
 		this.identite = identite;
 		this.url = url;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, identite, url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personne other = (Personne) obj;
+		return Objects.equals(id, other.id) && Objects.equals(identite, other.identite)
+				&& Objects.equals(url, other.url);
 	}
 
 	/**

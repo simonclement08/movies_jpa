@@ -39,7 +39,9 @@ public class FilmMapper {
 			film.setAnneeSortie(Integer.parseInt(filmDto.getAnneeSortie().substring(0, 4)));
 		}
 
-		film.setLangue(new Langue(filmDto.getLangue()));
+		if (filmDto.getLangue() != null) {
+			film.setLangue(new Langue(filmDto.getLangue()));
+		}
 
 		for (String genre : filmDto.getGenres()) {
 			if (StringUtils.isNotBlank(genre)) {

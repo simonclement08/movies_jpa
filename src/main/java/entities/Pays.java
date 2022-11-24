@@ -29,7 +29,7 @@ public class Pays {
 	private int id;
 
 	/** Nom */
-	@Column(name = "NOM", length = 50, nullable = false)
+	@Column(name = "NOM", length = 100, nullable = false)
 	private String nom;
 
 	/** Url */
