@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import entities.Acteur;
+import entities.Film;
 
 /**
  * RealisateurDao
@@ -37,5 +38,20 @@ public class ActeurDao extends AbstractDao<Acteur> {
 		}
 
 		return results.get(0);
+	}
+	
+	public List<Acteur> findByFilm(Film film){
+		TypedQuery<Acteur> query = em.createQuery("SELECT DISTINCT a "
+				+ "FROM " + classe.getSimpleName() + " a "
+				+ "JOIN a.castingPrincipal c "
+				+ "JOIN a.roles r "
+				+ "JOIN r.film f "
+				+ "WHERE c.id = :id OR f.id = :id "
+				+ "ORDER BY a.identite", classe);
+		query.setParameter("id", film.getId());
+		
+		List<Acteur> resultsActeurs = query.getResultList();
+		
+		return resultsActeurs;
 	}
 }

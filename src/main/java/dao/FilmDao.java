@@ -26,21 +26,17 @@ public class FilmDao extends AbstractDao<Film> {
 	}
 	
 	public List<Film> findByActeur(Acteur acteur) {
-
-		TypedQuery<Film> query = em.createQuery("SELECT DISTINCT f FROM " + classe.getSimpleName() + " f "
+		TypedQuery<Film> query = em.createQuery("SELECT DISTINCT f "
+				+ "FROM " + classe.getSimpleName() + " f "
 				+ "JOIN f.castingPrincipal c "
 				+ "JOIN f.roles r "
 				+ "JOIN r.acteur a "
 				+ "WHERE a.id = :id OR c.id = :id "
-				+ "ORDER BY f.anneeSortie",
-				classe);
+				+ "ORDER BY f.anneeSortie", classe);
 		query.setParameter("id", acteur.getId());
 
-		List<Film> results = query.getResultList();
-		if (results.isEmpty()) {
-			return null;
-		}
+		List<Film> resultsFilms = query.getResultList();
 
-		return results;
+		return resultsFilms;
 	}
 }

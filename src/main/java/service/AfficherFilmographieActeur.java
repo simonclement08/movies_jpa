@@ -9,13 +9,18 @@ import entities.Acteur;
 import entities.Film;
 import exceptions.MenuServiceException;
 
+/**
+ * AfficherFilmographieActeur
+ *
+ * Permet de rechercher en BDD tous les films d'un acteur et de les afficher
+ */
 public class AfficherFilmographieActeur extends MenuService {
 
 	@Override
 	public void traiter(Scanner scanner) throws MenuServiceException {
 		Acteur acteur = null;
 		while (acteur == null) {
-			String identite = MenuService.afficherMessage(scanner, "le nom d'un acteur");
+			String identite = MenuService.afficherMessage(scanner, "un acteur");
 
 			ActeurDao acteurDao = new ActeurDao(em);
 			acteur = acteurDao.find(identite);
@@ -28,8 +33,7 @@ public class AfficherFilmographieActeur extends MenuService {
 					System.out.println("- " + film.getNom() + annee);
 				}
 			} else {
-				System.out.println("test");
-				throw new MenuServiceException("Aucun acteur trouvé !");
+				throw new MenuServiceException("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
 			}
 		}
 	}

@@ -8,11 +8,14 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Acteur
@@ -37,6 +40,14 @@ public class Acteur extends Personne {
 	@ManyToOne
 	@JoinColumn(name = "LIEUX_NAISSANCE_ID", nullable = true)
 	private Lieu lieuNaissance;
+	
+	/** Liste des films où l'acteur est un acteur principal */
+	@ManyToMany
+	@JoinTable(name = "MAIN_ACTEUR",
+		uniqueConstraints = { @UniqueConstraint(columnNames = { "FILM_ID", "ACTEUR_ID" }) },
+		joinColumns = @JoinColumn(name = "ACTEUR_ID", referencedColumnName = "ID"),
+		inverseJoinColumns = @JoinColumn(name = "FILM_ID", referencedColumnName = "ID"))
+	private List<Film> castingPrincipal = new ArrayList<Film>();
 
 	/** Liste des rôles de l'acteur */
 	@OneToMany(mappedBy = "acteur")
@@ -110,6 +121,15 @@ public class Acteur extends Personne {
 	 */
 	public void setLieuNaissance(Lieu lieuNaissance) {
 		this.lieuNaissance = lieuNaissance;
+	}
+
+	/**
+	 * Getter pour l'attribut castingPrincipal
+	 *
+	 * @return the castingPrincipal
+	 */
+	public List<Film> getCastingPrincipal() {
+		return castingPrincipal;
 	}
 
 	/**

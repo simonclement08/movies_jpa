@@ -1,10 +1,9 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 import exceptions.MenuServiceException;
+import service.AfficherCastingFilm;
 import service.AfficherFilmographieActeur;
 import service.MenuService;
-
 
 /**
  * Application
@@ -50,7 +49,12 @@ public class Application {
 				}
 				break;
 			case "2":
-
+				MenuService service2 = new AfficherCastingFilm();
+				try {
+					service2.traiter(scanner);
+				} catch (MenuServiceException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case "3":
 
@@ -61,6 +65,9 @@ public class Application {
 
 				break;
 			case "6":
+
+				break;
+			case "7":
 				running = false;
 				break;
 			}
