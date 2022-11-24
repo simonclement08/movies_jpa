@@ -171,10 +171,14 @@ public class FilmManager {
 			}
 			acteurService.insertionEntite(role.getActeur());
 			role.setFilm(film);
-			roleService.insertionEntite(role);
+			
 		}
 
 		filmService.insertionEntite(film);
+		
+		for (Role role : film.getRoles()) {
+			roleService.insertionEntite(role);
+		}
 		transaction.commit();
 	}
 

@@ -45,6 +45,11 @@ public class IntegrationMovies {
 
 		FilmManager filmManager = new FilmManager();
 		int i = 0;
+//		for (int j = 0; j < 100; j++) {
+//			filmManager.traiteFilm(films.get(j));
+//			
+//			
+//		}
 		for (Film film : films) {
 			i++;
 			filmManager.traiteFilm(film);

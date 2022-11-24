@@ -27,7 +27,7 @@ public class Role {
 	private int id;
 
 	/** Identité */
-	@Column(name = "CHARACTER_NAME", length = 50, nullable = true)
+	@Column(name = "CHARACTER_NAME", length = 150, nullable = true)
 	protected String characterName;
 
 	/** Film */
