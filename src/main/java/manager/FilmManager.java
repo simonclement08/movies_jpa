@@ -22,6 +22,9 @@ import entities.Role;
  */
 public class FilmManager {
 
+	/** Instance */
+	private final static FilmManager instance = new FilmManager();
+
 	/** em Entity Manager */
 	private EntityManager em;
 
@@ -50,7 +53,7 @@ public class FilmManager {
 	private RoleService roleService;
 
 	/** Constructeur */
-	public FilmManager() {
+	private FilmManager() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("movies");
 		em = entityManagerFactory.createEntityManager();
 
@@ -171,14 +174,15 @@ public class FilmManager {
 			}
 			acteurService.insertionEntite(role.getActeur());
 			role.setFilm(film);
-			
+
 		}
 
 		filmService.insertionEntite(film);
-		
+
 		for (Role role : film.getRoles()) {
 			roleService.insertionEntite(role);
 		}
+
 		transaction.commit();
 	}
 
@@ -189,4 +193,21 @@ public class FilmManager {
 		em.close();
 	}
 
+	/**
+	 * Getter pour l'attribut instance
+	 *
+	 * @return the instance
+	 */
+	public final static FilmManager getInstance() {
+		return FilmManager.instance;
+	}
+
+	/**
+	 * Getter pour l'attribut em
+	 *
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
 }

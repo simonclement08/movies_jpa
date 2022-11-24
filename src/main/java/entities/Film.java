@@ -44,7 +44,7 @@ public class Film {
 
 	/** Année de sortie */
 	@Column(name = "ANNEE_SORTIE", nullable = true)
-	private int anneeSortie;
+	private Integer anneeSortie;
 
 	/** Langue */
 	@ManyToOne
@@ -186,7 +186,7 @@ public class Film {
 	 *
 	 * @return the anneeSortie
 	 */
-	public int getAnneeSortie() {
+	public Integer getAnneeSortie() {
 		return anneeSortie;
 	}
 
@@ -195,7 +195,7 @@ public class Film {
 	 *
 	 * @param anneeSortie the anneeSortie to set
 	 */
-	public void setAnneeSortie(int anneeSortie) {
+	public void setAnneeSortie(Integer anneeSortie) {
 		this.anneeSortie = anneeSortie;
 	}
 
