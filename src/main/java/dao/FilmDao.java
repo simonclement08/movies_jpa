@@ -74,6 +74,19 @@ public class FilmDao extends AbstractDao<Film> {
 	 * @return List<Film>
 	 */
 	public List<Film> findCommunFilm(Acteur acteur1, Acteur acteur2) {
-		return null;
+		TypedQuery<Film> query = em.createQuery("SELECT DISTINCT f "
+				+ "FROM " + classe.getSimpleName() + " f "
+				+ "JOIN f.castingPrincipal c "
+				+ "JOIN f.roles r "
+				+ "JOIN r.acteur a "
+				+ "WHERE (a.id = :acteur1 OR c.id = :acteur1) "
+				+ "AND (a.id = :acteur2 OR c.id = :acteur2) "
+				+ "ORDER BY f.anneeSortie", classe);
+		query.setParameter("acteur1", acteur1.getId());
+		query.setParameter("acteur2", acteur2.getId());
+
+		List<Film> resultsFilms = query.getResultList();
+
+		return resultsFilms;
 	}
 }

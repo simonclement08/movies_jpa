@@ -19,12 +19,13 @@ public class AfficherFilmographieActeur extends MenuService {
 	@Override
 	public void traiter(Scanner scanner) throws MenuServiceException {
 		Acteur acteur = null;
-		while (acteur == null) {
+		boolean isRunning = true;
+		while (acteur == null && isRunning) {
 			String identite = MenuService.afficherMessage(scanner, "un acteur");
 
 			ActeurDao acteurDao = new ActeurDao(em);
 			acteur = acteurDao.find(identite);
-			
+
 			if (acteur != null) {
 				FilmDao filmDao = new FilmDao(em);
 				List<Film> films = filmDao.findByActeur(acteur);
@@ -33,7 +34,8 @@ public class AfficherFilmographieActeur extends MenuService {
 					System.out.println("- " + film.getNom() + annee);
 				}
 			} else {
-				throw new MenuServiceException("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
+				isRunning = false;
+				System.err.println("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
 			}
 		}
 	}

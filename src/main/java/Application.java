@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import exceptions.MenuServiceException;
 import service.AfficherCastingFilm;
+import service.AfficherCommunFilmBetweenActeurs;
 import service.AfficherFilmBetweenYears;
 import service.AfficherFilmographieActeur;
 import service.MenuService;
@@ -66,6 +67,12 @@ public class Application {
 				}
 				break;
 			case "4":
+				MenuService service4 = new AfficherCommunFilmBetweenActeurs();
+				try {
+					service4.traiter(scanner);
+				} catch (MenuServiceException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "5":
 
