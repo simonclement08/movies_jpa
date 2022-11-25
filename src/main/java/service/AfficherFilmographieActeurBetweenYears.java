@@ -11,6 +11,12 @@ import entities.Acteur;
 import entities.Film;
 import exceptions.MenuServiceException;
 
+/**
+ * AfficherFilmographieActeurBetweenYears
+ *
+ * Permet de rechercher en BDD tous les films d'un acteur entre deux années et
+ * de les afficher
+ */
 public class AfficherFilmographieActeurBetweenYears extends MenuService {
 
 	@Override

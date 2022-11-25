@@ -8,6 +8,11 @@ import dao.FilmDao;
 import entities.Acteur;
 import entities.Film;
 
+/**
+ * AfficherCommunActeurBetweenFilms
+ *
+ * Permet de rechercher en BDD tous les acteurs commun entre deux films
+ */
 public class AfficherCommunActeurBetweenFilms extends MenuService {
 	@Override
 	public void traiter(Scanner scanner) {

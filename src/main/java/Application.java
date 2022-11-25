@@ -14,7 +14,6 @@ import service.MenuService;
  *
  * Application qui permet de réaliser des recherches dans les données avec un
  * menu
- * 
  */
 public class Application {
 
