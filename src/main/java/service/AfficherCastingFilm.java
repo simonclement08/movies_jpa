@@ -21,14 +21,17 @@ public class AfficherCastingFilm extends MenuService {
 		Film film = null;
 		boolean isRunning = true;
 		while (film == null && isRunning) {
-			String nom = MenuService.afficherMessage(scanner, "un film");
+			String nom = MenuService.afficherMessage(scanner, "un film, '1' pour sortir");
 
 			FilmDao filmDao = new FilmDao(em);
 			film = filmDao.find(nom);
 
 			if (film == null) {
-				isRunning = false;
-				System.err.println("Aucun film trouvé, ce film n'existe pas dans la BDD");
+				if (nom.equals("1")) {
+					isRunning = false;
+				} else {
+					System.err.println("Aucun film trouvé, ce film n'existe pas dans la BDD");
+				}
 			} else {
 				ActeurDao acteurDao = new ActeurDao(em);
 				List<Acteur> acteurs = acteurDao.findByFilm(film);

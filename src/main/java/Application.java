@@ -6,6 +6,7 @@ import service.AfficherCommunActeurBetweenFilms;
 import service.AfficherCommunFilmBetweenActeurs;
 import service.AfficherFilmBetweenYears;
 import service.AfficherFilmographieActeur;
+import service.AfficherFilmographieActeurBetweenYears;
 import service.MenuService;
 
 /**
@@ -72,7 +73,7 @@ public class Application {
 				try {
 					service4.traiter(scanner);
 				} catch (MenuServiceException e) {
-					e.printStackTrace();
+					System.err.println(e.getMessage());
 				}
 				break;
 			case "5":
@@ -80,11 +81,16 @@ public class Application {
 				try {
 					service5.traiter(scanner);
 				} catch (MenuServiceException e) {
-					e.printStackTrace();
+					System.err.println(e.getMessage());
 				}
 				break;
 			case "6":
-
+				MenuService service6 = new AfficherFilmographieActeurBetweenYears();
+				try {
+					service6.traiter(scanner);
+				} catch (MenuServiceException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case "7":
 				running = false;

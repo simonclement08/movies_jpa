@@ -21,14 +21,17 @@ public class AfficherFilmographieActeur extends MenuService {
 		Acteur acteur = null;
 		boolean isRunning = true;
 		while (acteur == null && isRunning) {
-			String identite = MenuService.afficherMessage(scanner, "un acteur");
+			String identite = MenuService.afficherMessage(scanner, "un acteur, '1' pour sortir");
 
 			ActeurDao acteurDao = new ActeurDao(em);
 			acteur = acteurDao.find(identite);
 
 			if (acteur == null) {
-				isRunning = false;
-				System.err.println("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
+				if (identite.equals("1")) {
+					isRunning = false;
+				} else {
+					System.err.println("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
+				}
 			} else {
 				FilmDao filmDao = new FilmDao(em);
 				List<Film> films = filmDao.findByActeur(acteur);
