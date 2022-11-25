@@ -26,16 +26,21 @@ public class AfficherFilmographieActeur extends MenuService {
 			ActeurDao acteurDao = new ActeurDao(em);
 			acteur = acteurDao.find(identite);
 
-			if (acteur != null) {
+			if (acteur == null) {
+				isRunning = false;
+				System.err.println("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
+			} else {
 				FilmDao filmDao = new FilmDao(em);
 				List<Film> films = filmDao.findByActeur(acteur);
+
+				if (films.size() == 0) {
+					System.out.println("Cet acteur n'a joué dans aucun film");
+				}
+
 				for (Film film : films) {
 					String annee = film.getAnneeSortie() == null ? "" : " (" + film.getAnneeSortie() + ")";
 					System.out.println("- " + film.getNom() + annee);
 				}
-			} else {
-				isRunning = false;
-				System.err.println("Aucun acteur trouvé, cet acteur n'existe pas dans la BDD");
 			}
 		}
 	}

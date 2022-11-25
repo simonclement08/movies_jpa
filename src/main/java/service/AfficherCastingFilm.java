@@ -26,15 +26,18 @@ public class AfficherCastingFilm extends MenuService {
 			FilmDao filmDao = new FilmDao(em);
 			film = filmDao.find(nom);
 
-			if (film != null) {
+			if (film == null) {
+				isRunning = false;
+				System.err.println("Aucun film trouvé, ce film n'existe pas dans la BDD");
+			} else {
 				ActeurDao acteurDao = new ActeurDao(em);
 				List<Acteur> acteurs = acteurDao.findByFilm(film);
+				if (acteurs.size() == 0) {
+					System.out.println("Aucun acteur n'est enregistré pour ce film");
+				}
 				for (Acteur acteur : acteurs) {
 					System.out.println("- " + acteur.getIdentite());
 				}
-			} else {
-				isRunning = false;
-				System.err.println("Aucun film trouvé, ce film n'existe pas dans la BDD");
 			}
 		}
 	}

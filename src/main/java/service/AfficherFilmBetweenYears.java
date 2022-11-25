@@ -33,13 +33,7 @@ public class AfficherFilmBetweenYears extends MenuService {
 			} else {
 				while (!NumberUtils.isDigits(yearMaxUser) && isRunning) {
 					yearMaxUser = MenuService.afficherMessage(scanner, "une autre année, 'exit' pour sortir");
-					if (!NumberUtils.isDigits(yearMaxUser)) {
-						if (yearMaxUser.equals("exit")) {
-							isRunning = false;
-						} else {
-							System.err.println("Veuillez saisir une année correcte");
-						}
-					} else {
+					if (NumberUtils.isDigits(yearMaxUser)) {
 						Integer yearMin = Integer.parseInt(yearMinUser);
 						Integer yearMax = Integer.parseInt(yearMaxUser);
 
@@ -50,9 +44,20 @@ public class AfficherFilmBetweenYears extends MenuService {
 
 						FilmDao filmDao = new FilmDao(em);
 						List<Film> films = filmDao.findBetweenYears(yearMin, yearMax);
+
+						if (films.size() == 0) {
+							System.out.println("Aucun film dans la BDD n'est sorti entre ces deux années");
+						}
+
 						for (Film film : films) {
 							String annee = film.getAnneeSortie() == null ? "" : " (" + film.getAnneeSortie() + ")";
 							System.out.println("- " + film.getNom() + annee);
+						}
+					} else {
+						if (yearMaxUser.equals("exit")) {
+							isRunning = false;
+						} else {
+							System.err.println("Veuillez saisir une année correcte");
 						}
 					}
 				}

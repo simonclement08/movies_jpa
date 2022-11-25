@@ -31,5 +31,11 @@ public class ActeurDaoTest {
 		assertEquals(8, acteurs.size());
 	}
 
-	
+	@Test
+	public void testFindCommunActeur() {
+		Film film1 = filmDao.find("Avengers");
+		Film film2 = filmDao.find("Avengers: Endgame");
+		List<Acteur> acteurs = acteurDao.findCommunActeur(film1, film2);
+		assertEquals(4, acteurs.size());
+	}
 }

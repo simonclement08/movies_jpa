@@ -60,4 +60,27 @@ public class ActeurDao extends AbstractDao<Acteur> {
 		
 		return resultsActeurs;
 	}
+
+	/**
+	 * Retourne tous les acteurs commun entre deux films
+	 * 
+	 * @param film
+	 * @return List<Acteur>
+	 */
+	public List<Acteur> findCommunActeur(Film film1, Film film2){
+		TypedQuery<Acteur> query = em.createQuery("SELECT DISTINCT a "
+				+ "FROM " + classe.getSimpleName() + " a "
+				+ "JOIN a.castingPrincipal c "
+				+ "JOIN a.roles r "
+				+ "JOIN r.film f "
+				+ "WHERE (c.id = :film1 OR f.id = :film1) "
+				+ "AND (c.id = :film2 OR f.id = :film2) "
+				+ "ORDER BY a.identite", classe);
+		query.setParameter("film1", film1.getId());
+		query.setParameter("film2", film2.getId());
+		
+		List<Acteur> resultsActeurs = query.getResultList();
+		
+		return resultsActeurs;
+	}
 }
