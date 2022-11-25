@@ -24,7 +24,7 @@ public class FilmDao extends AbstractDao<Film> {
 	public FilmDao(EntityManager em) {
 		super(em, Film.class);
 	}
-	
+
 	/**
 	 * Retourne tous les films joués par un acteur
 	 * 
@@ -45,7 +45,7 @@ public class FilmDao extends AbstractDao<Film> {
 
 		return resultsFilms;
 	}
-	
+
 	/**
 	 * Retourne tous les films sortis entre yearMin et yearMax
 	 * 
@@ -64,5 +64,16 @@ public class FilmDao extends AbstractDao<Film> {
 		List<Film> resultsFilms = query.getResultList();
 
 		return resultsFilms;
+	}
+
+	/**
+	 * Retourne tous les films commun entre deux acteurs
+	 * 
+	 * @param acteur1
+	 * @param acteur2
+	 * @return List<Film>
+	 */
+	public List<Film> findCommunFilm(Acteur acteur1, Acteur acteur2) {
+		return null;
 	}
 }
